@@ -12,10 +12,10 @@ public final class ModItems {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, TechCraftAdditions.MOD_ID);
 
     public static final DeferredHolder<Item, Item> DARK_WORLD_ENGINE_TABLET =
-            registerLoreItem("dark_world_engine_tablet", new Item.Properties().stacksTo(1));
+            registerUnstackableLoreItem("dark_world_engine_tablet");
 
     public static final DeferredHolder<Item, Item> ILLUMINATED_WORLD_ENGINE_TABLET =
-            registerLoreItem("illuminated_world_engine_tablet", new Item.Properties().stacksTo(1));
+            registerUnstackableLoreItem("illuminated_world_engine_tablet");
 
     public static final DeferredHolder<Item, Item> SHATTERED_HEART =
             registerLoreItem("shattered_heart");
@@ -48,19 +48,19 @@ public final class ModItems {
             registerLoreItem("otherworldly_fragment");
 
     public static final DeferredHolder<Item, Item> DIMENSIONAL_DESCENDER =
-            registerLoreItem("dimensional_descender");
+            registerUnstackableLoreItem("dimensional_descender");
 
     public static final DeferredHolder<Item, Item> LOOSE_STRANDS_OF_TIME =
             registerLoreItem("loose_strands_of_time");
 
     public static final DeferredHolder<Item, Item> UNIVERSE_TETHER =
-            registerLoreItem("universe_tether");
+            registerUnstackableLoreItem("universe_tether");
 
     public static final DeferredHolder<Item, Item> ECHOES_OF_TOMORROW =
-            registerLoreItem("echoes_of_tomorrow");
+            registerUnstackableLoreItem("echoes_of_tomorrow");
 
     public static final DeferredHolder<Item, Item> SCULK_RESONANCE_ENGINE =
-            registerLoreItem("sculk_resonance_engine");
+            registerUnstackableLoreItem("sculk_resonance_engine");
 
     public static final DeferredHolder<Item, Item> FINELY_WOVEN_TIME =
             registerLoreItem("finely_woven_time");
@@ -70,6 +70,10 @@ public final class ModItems {
 
     private static DeferredHolder<Item, Item> registerLoreItem(String name) {
         return registerLoreItem(name, new Item.Properties());
+    }
+
+    private static DeferredHolder<Item, Item> registerUnstackableLoreItem(String name) {
+        return registerLoreItem(name, new Item.Properties().stacksTo(1));
     }
 
     private static DeferredHolder<Item, Item> registerLoreItem(String name, Item.Properties properties) {

@@ -108,7 +108,7 @@ The visible prototype chain is:
 - Type: `oritech:particle_collision`
 - Inputs: `deeperdarker:heart_of_the_deep` and `minecraft:amethyst_cluster`
 - Output: `techcraft_additions:shattered_heart`
-- Collision speed threshold: `500000`
+- Collision speed threshold: `18000`
 
 ## Verified Dependency IDs Used
 

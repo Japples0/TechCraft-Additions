@@ -64,4 +64,4 @@ For full in-pack testing, install the built addon JAR from `build/libs/` into th
 
 Current recipes and textures are intentionally temporary. The recipe chain is designed to make the whole journey visible in EMI and craftable during development. Later milestones should replace one placeholder recipe at a time with real integrations from Oritech, Mekanism, AE2, ProjectE, Draconic Evolution, Re-Avaritia, Deeper and Darker, ArPhEx, Iron's Spellbooks, and related pack systems.
 
-The first real integration is documented in `docs/ORITECH_SHATTERED_HEART_INTEGRATION.md`: `deeperdarker:heart_of_the_deep` collides with `minecraft:amethyst_cluster` in Oritech's Particle Accelerator at `500000` collision speed to create `techcraft_additions:shattered_heart`.
+The first real integration is documented in `docs/ORITECH_SHATTERED_HEART_INTEGRATION.md`: `deeperdarker:heart_of_the_deep` collides with `minecraft:amethyst_cluster` in Oritech's Particle Accelerator at `18000` collision speed to create `techcraft_additions:shattered_heart`.

@@ -83,7 +83,7 @@ Recipe ID: `techcraft_additions:oritech/shattered_heart`
       "id": "techcraft_additions:shattered_heart"
     }
   ],
-  "time": 500000
+  "time": 18000
 }
 ```
 
@@ -97,10 +97,10 @@ The Splintered Echo prototype recipe remains in that file and is still gated by 
 
 ## Assumptions And Risks
 
-- Assumption: The requested `500,000 J` maps to Oritech's particle collision `time`/speed threshold, because Oritech's collision recipe and EMI code expose this value as collision speed rather than as an energy field named `energy` or `joules`.
+- Assumption: The requested `18000 J` maps to Oritech's particle collision `time`/speed threshold, because Oritech's collision recipe and EMI code expose this value as collision speed rather than as an energy field named `energy` or `joules`.
 - Assumption: Bundling the recipe in the addon jar is acceptable because TechCraft: Additions is a pack addon and the target pack includes Oritech and Deeper and Darker.
 - Risk: A standalone Gradle dev client without Oritech installed may report an unknown recipe type during resource loading. Full-pack testing should be done in `Dev-TechCraft`.
-- Risk: The practical accelerator setup needed to reach `500000` collision speed should be verified in the full pack, especially with Oritech Things magnetic field assistance.
+- Verified by user testing: `18000` is currently reachable in the TechCraft testing environment.
 
 ## Recommended Verification
 
@@ -109,4 +109,4 @@ The Splintered Echo prototype recipe remains in that file and is still gated by 
 3. Launch the full dev profile.
 4. Confirm EMI shows `techcraft_additions:oritech/shattered_heart` as an Oritech Particle Accelerator recipe.
 5. Confirm the temporary shaped Shattered Heart recipe no longer appears.
-6. Confirm colliding `deeperdarker:heart_of_the_deep` with `minecraft:amethyst_cluster` at or above `500000` speed outputs `techcraft_additions:shattered_heart`.
+6. Confirm colliding `deeperdarker:heart_of_the_deep` with `minecraft:amethyst_cluster` at or above `18000` speed outputs `techcraft_additions:shattered_heart`.
