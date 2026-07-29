@@ -32,12 +32,6 @@ ServerEvents.recipes(event => {
     'minecraft:chorus_fruit'
   ]).id(TCA.developmentId('end_attuned_rift'))
 
-  event.shapeless(TCA.item('otherside_attuned_rift'), [
-    TCA.item('dimensional_rift'),
-    'deeperdarker:sculk_stone',
-    'deeperdarker:resonarium'
-  ]).id(TCA.developmentId('otherside_attuned_rift'))
-
   event.shapeless(TCA.item('draconic_attuned_rift'), [
     TCA.item('dimensional_rift'),
     'draconicevolution:draconium_dust',

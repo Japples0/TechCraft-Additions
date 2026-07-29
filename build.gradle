@@ -12,6 +12,32 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
+def techcraftDevInstanceProvider = providers.gradleProperty("techcraft.devInstance")
+        .orElse(providers.environmentVariable("TECHCRAFT_DEV_INSTANCE"))
+
+def techcraftPackJar = { String fileName ->
+    def devInstancePath = techcraftDevInstanceProvider.orNull
+    if (devInstancePath == null || devInstancePath.isBlank()) {
+        throw new GradleException("Set TECHCRAFT_DEV_INSTANCE or -Ptechcraft.devInstance so Mekanism/MekMM compile jars can be resolved.")
+    }
+    def jarFile = file("${devInstancePath}/mods/${fileName}")
+    if (!jarFile.isFile()) {
+        throw new GradleException("Required TechCraft pack jar is missing: ${jarFile}")
+    }
+    jarFile
+}
+
+dependencies {
+    compileOnly files(
+            techcraftPackJar("Mekanism-1.21.1-10.7.19.85.jar"),
+            techcraftPackJar("mekmm-1.21.1-1.4.0.jar")
+    )
+    runtimeOnly files(
+            techcraftPackJar("Mekanism-1.21.1-10.7.19.85.jar"),
+            techcraftPackJar("mekmm-1.21.1-1.4.0.jar")
+    )
+}
+
 neoForge {
     version = neo_version
 

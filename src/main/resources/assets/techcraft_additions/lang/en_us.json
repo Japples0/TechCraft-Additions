@@ -36,6 +36,8 @@
   "item.techcraft_additions.universe_tether.lore": "A restraint for holding one reality steady while another answers.",
   "item.techcraft_additions.echoes_of_tomorrow": "Echoes of Tomorrow",
   "item.techcraft_additions.echoes_of_tomorrow.lore": "The first proof that the engine can hear the future approaching.",
+  "chemical.techcraft_additions.otherside_atmosphere": "Otherside Atmosphere",
+  "description.techcraft_additions.otherside_atmosphere": "Air from below memory, saturated with violet sculk resonance.",
   "block.techcraft_additions.resonance_casing": "Resonance Casing",
   "block.techcraft_additions.sculk_resonance_controller": "Sculk Resonance Controller"
 }

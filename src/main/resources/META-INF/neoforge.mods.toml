@@ -22,3 +22,27 @@ type = "required"
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "mekanism"
+type = "required"
+versionRange = "[10.7.19,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "mekmm"
+type = "required"
+versionRange = "[1.4.0,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "deeperdarker"
+type = "required"
+versionRange = "[1.4.1,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[mixins]]
+config = "techcraft_additions.mixins.json"
