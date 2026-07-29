@@ -1,6 +1,7 @@
 package com.techcraft.additions.registry;
 
 import com.techcraft.additions.TechCraftAdditions;
+import com.techcraft.additions.item.LoreItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -10,13 +11,65 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class ModItems {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, TechCraftAdditions.MOD_ID);
 
+    public static final DeferredHolder<Item, Item> DARK_WORLD_ENGINE_TABLET =
+            registerLoreItem("dark_world_engine_tablet");
+
+    public static final DeferredHolder<Item, Item> ILLUMINATED_WORLD_ENGINE_TABLET =
+            registerLoreItem("illuminated_world_engine_tablet");
+
+    public static final DeferredHolder<Item, Item> SHATTERED_HEART =
+            registerLoreItem("shattered_heart");
+
+    public static final DeferredHolder<Item, Item> SPLINTERED_ECHO =
+            registerLoreItem("splintered_echo");
+
+    public static final DeferredHolder<Item, Item> DIMENSIONAL_RIFT =
+            registerLoreItem("dimensional_rift");
+
+    public static final DeferredHolder<Item, Item> OVERWORLD_ATTUNED_RIFT =
+            registerLoreItem("overworld_attuned_rift");
+
+    public static final DeferredHolder<Item, Item> NETHER_ATTUNED_RIFT =
+            registerLoreItem("nether_attuned_rift");
+
+    public static final DeferredHolder<Item, Item> END_ATTUNED_RIFT =
+            registerLoreItem("end_attuned_rift");
+
+    public static final DeferredHolder<Item, Item> OTHERSIDE_ATTUNED_RIFT =
+            registerLoreItem("otherside_attuned_rift");
+
+    public static final DeferredHolder<Item, Item> DRACONIC_ATTUNED_RIFT =
+            registerLoreItem("draconic_attuned_rift");
+
+    public static final DeferredHolder<Item, Item> TERRESTRIAL_LATTICE =
+            registerLoreItem("terrestrial_lattice");
+
+    public static final DeferredHolder<Item, Item> OTHERWORLDLY_FRAGMENT =
+            registerLoreItem("otherworldly_fragment");
+
+    public static final DeferredHolder<Item, Item> DIMENSIONAL_DESCENDER =
+            registerLoreItem("dimensional_descender");
+
+    public static final DeferredHolder<Item, Item> LOOSE_STRANDS_OF_TIME =
+            registerLoreItem("loose_strands_of_time");
+
+    public static final DeferredHolder<Item, Item> UNIVERSE_TETHER =
+            registerLoreItem("universe_tether");
+
+    public static final DeferredHolder<Item, Item> ECHOES_OF_TOMORROW =
+            registerLoreItem("echoes_of_tomorrow");
+
     public static final DeferredHolder<Item, Item> SCULK_RESONANCE_ENGINE =
-            ITEMS.register("sculk_resonance_engine", () -> new Item(new Item.Properties()));
+            registerLoreItem("sculk_resonance_engine");
 
     public static final DeferredHolder<Item, Item> FINELY_WOVEN_TIME =
-            ITEMS.register("finely_woven_time", () -> new Item(new Item.Properties()));
+            registerLoreItem("finely_woven_time");
 
     private ModItems() {
+    }
+
+    private static DeferredHolder<Item, Item> registerLoreItem(String name) {
+        return ITEMS.register(name, () -> new LoreItem(new Item.Properties(), "item.techcraft_additions." + name + ".lore"));
     }
 
     public static void register(IEventBus modEventBus) {

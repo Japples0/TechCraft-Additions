@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "techcraft_additions:item/finely_woven_time"
+    "layer0": "techcraft_additions:item/draconic_attuned_rift"
   }
 }
