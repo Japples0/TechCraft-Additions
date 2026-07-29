@@ -74,4 +74,5 @@ No existing `finely_woven_time`, `sculk_resonance_engine`, `resonance_casing`, o
 - The initial placeholders intentionally have no recipes and no functional block entities.
 - The Dark World Engine should start as a standalone NeoForge multiblock and only add optional direct integrations after each dependency's source/API stability is reviewed.
 - The exact behavior of `mekmm:unstable_dimensional_gas` was verified by lang/EMI and MekMM classes, but not by a JSON asset path; it appears to be a Mekanism chemical registration.
+- Later branch verification found MekMM's Ambient Gas Collector hard-codes `mekmm:unstable_dimensional_gas` in `com.jerry.mekmm.common.tile.machine.TileEntityAmbientGasCollector`, so per-dimension gas output requires custom Java behaviour rather than recipes/data alone. See `docs/OTHERSIDE_ATMOSPHERE_INTEGRATION.md`.
 - Client registration was not verified in-game during this audit document write-up; the Gradle build compiles the mod and processes assets successfully.

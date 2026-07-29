@@ -18,8 +18,9 @@ This branch contains a visible prototype of the endgame progression chain:
 - Temporary placeholder item textures, models, names, lore tooltips, and creative-tab access.
 - Temporary KubeJS shaped/shapeless recipes staged under `pack/kubejs`, except where a prototype recipe has already been replaced by a real integration.
 - A real Oritech Particle Accelerator recipe for `techcraft_additions:shattered_heart`.
+- A real Mekanism chemical plus Chemical Injection Chamber recipe for `techcraft_additions:otherside_attuned_rift`.
 
-No Dark World Engine multiblock logic, teleportation, chunk loading, custom gases, custom rendering, or third-party machine behavior is implemented yet.
+No Dark World Engine multiblock logic, teleportation, chunk loading, custom rendering, or final third-party machine balance is implemented yet.
 
 ## Build
 
@@ -28,8 +29,11 @@ Use JDK 21.
 ```powershell
 $env:JAVA_HOME = "C:\Program Files\Java\jdk-21.0.11"
 $env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
+$env:TECHCRAFT_DEV_INSTANCE = "D:\profiles\Dev-TechCraft"
 .\gradlew.bat build
 ```
+
+`TECHCRAFT_DEV_INSTANCE` is required because this addon compiles against exact Mekanism and Mekanism: MoreMachine JARs from the local development pack.
 
 If you have a local Minecraft/NeoForge Maven cache, configure it outside the repository:
 
@@ -65,3 +69,5 @@ For full in-pack testing, install the built addon JAR from `build/libs/` into th
 Current recipes and textures are intentionally temporary. The recipe chain is designed to make the whole journey visible in EMI and craftable during development. Later milestones should replace one placeholder recipe at a time with real integrations from Oritech, Mekanism, AE2, ProjectE, Draconic Evolution, Re-Avaritia, Deeper and Darker, ArPhEx, Iron's Spellbooks, and related pack systems.
 
 The first real integration is documented in `docs/ORITECH_SHATTERED_HEART_INTEGRATION.md`: `deeperdarker:heart_of_the_deep` collides with `minecraft:amethyst_cluster` in Oritech's Particle Accelerator at `18000` collision speed to create `techcraft_additions:shattered_heart`.
+
+The second real integration is documented in `docs/OTHERSIDE_ATMOSPHERE_INTEGRATION.md`: MekMM's Ambient Gas Collector preserves `mekmm:unstable_dimensional_gas` in the Overworld, produces `techcraft_additions:otherside_atmosphere` in `deeperdarker:otherside`, and no longer produces gas in other dimensions.

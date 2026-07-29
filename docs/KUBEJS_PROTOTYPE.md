@@ -12,13 +12,14 @@ Verified implemented:
 - Each item has a temporary model, placeholder texture, English name, lore tooltip, and creative-tab access.
 - Temporary KubeJS recipes are staged in-repo under `pack/kubejs/server_scripts/techcraft_additions`.
 - The temporary shaped Shattered Heart recipe has been replaced by a standard addon datapack recipe for Oritech.
+- The temporary Otherside Attuned Rift recipe has been replaced by a Mekanism chemical injection recipe using `techcraft_additions:otherside_atmosphere`.
 - A sync script copies only the repo-local KubeJS files into the isolated `Dev-TechCraft` instance.
 
 Not implemented:
 
 - Dark World Engine multiblock behavior.
-- Custom machine processing.
-- Teleportation, chunk loading, AE2 remote access, EMC behavior, or Mekanism/Oritech machine integration.
+- Custom machine processing beyond the current Oritech and Mekanism datapack recipes.
+- Teleportation, chunk loading, AE2 remote access, EMC behavior, or final cross-mod machine balance.
 - Final art or final balance.
 
 ## Registered Items
@@ -53,14 +54,17 @@ Existing placeholder block IDs from the bootstrap remain:
 
 All recipe IDs are under `techcraft_additions:development/`.
 
-Exception: `techcraft_additions:oritech/shattered_heart` is now a permanent addon datapack recipe, not a KubeJS development recipe.
+Exceptions:
+
+- `techcraft_additions:oritech/shattered_heart` is now a permanent addon datapack recipe, not a KubeJS development recipe.
+- `techcraft_additions:mekanism/otherside_attuned_rift` is now a permanent addon datapack recipe, not a KubeJS development recipe.
 
 | File | Purpose |
 | --- | --- |
 | `00_development_helpers.js` | Shared namespace helper and development recipe flag. |
 | `10_tablet_activation.js` | Creates and illuminates the Dark World Engine Tablet. |
 | `20_shattered_heart.js` | Creates Splintered Echo. The old temporary shaped Shattered Heart recipe was removed. |
-| `30_dimensional_rifts.js` | Creates base and attuned dimensional rifts. |
+| `30_dimensional_rifts.js` | Creates base and attuned dimensional rifts except the Otherside Attuned Rift, which now uses Mekanism chemical injection. |
 | `40_terrestrial_lattice.js` | Combines attuned rifts into Terrestrial Lattice. |
 | `50_otherworldly_fragment.js` | Creates Otherworldly Fragment. |
 | `60_dimensional_descender.js` | Creates Universe Tether and Dimensional Descender. |
@@ -109,6 +113,17 @@ The visible prototype chain is:
 - Inputs: `deeperdarker:heart_of_the_deep` and `minecraft:amethyst_cluster`
 - Output: `techcraft_additions:shattered_heart`
 - Collision speed threshold: `18000`
+
+`otherside_attuned_rift` is now obtained through Mekanism instead of the development KubeJS shapeless recipe:
+
+- Recipe ID: `techcraft_additions:mekanism/otherside_attuned_rift`
+- Type: `mekanism:injecting`
+- Machine: Chemical Injection Chamber
+- Item input: `techcraft_additions:dimensional_rift`
+- Chemical input: `1000` mB `techcraft_additions:otherside_atmosphere`
+- Output: `techcraft_additions:otherside_attuned_rift`
+
+`techcraft_additions:otherside_atmosphere` is collected with Mekanism: MoreMachine's Ambient Gas Collector in `deeperdarker:otherside`. The collector still produces `mekmm:unstable_dimensional_gas` in the Overworld and produces no gas in other dimensions.
 
 ## Verified Dependency IDs Used
 
