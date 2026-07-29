@@ -2,7 +2,7 @@
 
 Date: 2026-07-29
 
-This document covers the temporary endgame progression recipe prototype on branch `feature/endgame-progression-prototype`.
+This document covers the temporary endgame progression recipe prototype, with ongoing replacements tracked on feature branches such as `feature/oritech-shattered-heart-integration`.
 
 ## Scope
 
@@ -11,6 +11,7 @@ Verified implemented:
 - Permanent Java item IDs exist for the progression chain.
 - Each item has a temporary model, placeholder texture, English name, lore tooltip, and creative-tab access.
 - Temporary KubeJS recipes are staged in-repo under `pack/kubejs/server_scripts/techcraft_additions`.
+- The temporary shaped Shattered Heart recipe has been replaced by a standard addon datapack recipe for Oritech.
 - A sync script copies only the repo-local KubeJS files into the isolated `Dev-TechCraft` instance.
 
 Not implemented:
@@ -52,11 +53,13 @@ Existing placeholder block IDs from the bootstrap remain:
 
 All recipe IDs are under `techcraft_additions:development/`.
 
+Exception: `techcraft_additions:oritech/shattered_heart` is now a permanent addon datapack recipe, not a KubeJS development recipe.
+
 | File | Purpose |
 | --- | --- |
 | `00_development_helpers.js` | Shared namespace helper and development recipe flag. |
 | `10_tablet_activation.js` | Creates and illuminates the Dark World Engine Tablet. |
-| `20_shattered_heart.js` | Creates Shattered Heart and Splintered Echo. |
+| `20_shattered_heart.js` | Creates Splintered Echo. The old temporary shaped Shattered Heart recipe was removed. |
 | `30_dimensional_rifts.js` | Creates base and attuned dimensional rifts. |
 | `40_terrestrial_lattice.js` | Combines attuned rifts into Terrestrial Lattice. |
 | `50_otherworldly_fragment.js` | Creates Otherworldly Fragment. |
@@ -99,11 +102,20 @@ The visible prototype chain is:
 14. `sculk_resonance_engine`
 15. `echoes_of_tomorrow`
 
+`shattered_heart` is now obtained through Oritech instead of the development KubeJS shaped recipe:
+
+- Recipe ID: `techcraft_additions:oritech/shattered_heart`
+- Type: `oritech:particle_collision`
+- Inputs: `deeperdarker:heart_of_the_deep` and `minecraft:amethyst_cluster`
+- Output: `techcraft_additions:shattered_heart`
+- Collision speed threshold: `500000`
+
 ## Verified Dependency IDs Used
 
 These third-party IDs are used by the prototype recipes and were previously verified in `docs/TECHNICAL_AUDIT.md`:
 
 - `deeperdarker:sculk_stone`
+- `deeperdarker:heart_of_the_deep`
 - `deeperdarker:resonarium`
 - `deeperdarker:reinforced_echo_shard`
 - `deeperdarker:resonarium_plate`
@@ -180,4 +192,3 @@ Recommended replacement order:
 2. Replace rift attunement recipes next, using real dimension/mod progression gates.
 3. Replace `sculk_resonance_engine` after the casing and woven-time loops feel good.
 4. Leave `echoes_of_tomorrow` as the final prototype capstone until the Dark World Engine has real behavior.
-

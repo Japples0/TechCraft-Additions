@@ -1,0 +1,18 @@
+{
+  "type": "oritech:particle_collision",
+  "ingredients": [
+    {
+      "item": "deeperdarker:heart_of_the_deep"
+    },
+    {
+      "item": "minecraft:amethyst_cluster"
+    }
+  ],
+  "results": [
+    {
+      "count": 1,
+      "id": "techcraft_additions:shattered_heart"
+    }
+  ],
+  "time": 500000
+}
