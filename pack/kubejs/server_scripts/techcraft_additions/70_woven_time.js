@@ -1,5 +1,5 @@
 ServerEvents.recipes(event => {
-  const TCA = globalThis.TechCraftAdditions
+  const TCA = global.TechCraftAdditions
   if (!TCA || !TCA.developmentRecipesEnabled) return
 
   event.shapeless(Item.of(TCA.item('loose_strands_of_time'), 4), [

@@ -77,12 +77,14 @@ Exceptions:
 `00_development_helpers.js` defines:
 
 ```js
-globalThis.TechCraftAdditions = {
+global.TechCraftAdditions = {
   developmentRecipesEnabled: true,
   item: id => `techcraft_additions:${id}`,
   developmentId: id => `techcraft_additions:development/${id}`
 }
 ```
+
+In the installed KubeJS/Rhino environment this object is implemented as `global.TechCraftAdditions`; older documentation examples may show `globalThis`, but `globalThis` is not available in Dev-TechCraft.
 
 Set `developmentRecipesEnabled` to `false` when replacing the temporary recipes with real progression recipes. This disables every staged prototype recipe without deleting the files.
 
@@ -120,7 +122,7 @@ The visible prototype chain is:
 - Type: `mekanism:injecting`
 - Machine: Chemical Injection Chamber
 - Item input: `techcraft_additions:dimensional_rift`
-- Chemical input: `1000` mB `techcraft_additions:otherside_atmosphere`
+- Chemical input: `1` mB/tick `techcraft_additions:otherside_atmosphere`
 - Output: `techcraft_additions:otherside_attuned_rift`
 
 `techcraft_additions:otherside_atmosphere` is collected with Mekanism: MoreMachine's Ambient Gas Collector in `deeperdarker:otherside`. The collector still produces `mekmm:unstable_dimensional_gas` in the Overworld and produces no gas in other dimensions.

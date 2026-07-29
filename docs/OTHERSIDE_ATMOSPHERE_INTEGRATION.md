@@ -9,16 +9,16 @@ This document covers the vertical slice that replaces the temporary Otherside At
 Verified implemented:
 
 - Registered `techcraft_additions:otherside_atmosphere` as a Mekanism chemical.
-- Added a Mekanism chemical texture at `assets/techcraft_additions/textures/chemical/otherside_atmosphere.png`.
+- Added a sculk-derived Mekanism chemical texture at `assets/techcraft_additions/textures/liquid/otherside_atmosphere.png`.
 - Added `techcraft_additions:otherside_atmosphere` to Mekanism's `mekanism:chemical/gaseous` chemical tag.
 - Added English display text for `chemical.techcraft_additions.otherside_atmosphere`.
 - Added a Mekanism Chemical Injection Chamber recipe:
   - Recipe ID: `techcraft_additions:mekanism/otherside_attuned_rift`
   - Type: `mekanism:injecting`
   - Item input: `techcraft_additions:dimensional_rift`
-  - Chemical input: `1000` mB `techcraft_additions:otherside_atmosphere`
+  - Chemical input: `1` mB/tick `techcraft_additions:otherside_atmosphere`
   - Output: `techcraft_additions:otherside_attuned_rift`
-  - `per_tick_usage`: `false`
+  - `per_tick_usage`: `true`
 - Removed only the temporary KubeJS shapeless recipe for `techcraft_additions:otherside_attuned_rift`.
 - Preserved the existing Overworld collection path for `mekmm:unstable_dimensional_gas`.
 - Prevented MekMM's Ambient Gas Collector from producing gas in dimensions other than the Overworld and Otherside.
@@ -62,7 +62,8 @@ Verified Mekanism API/classes:
 - `mekanism.common.registration.impl.ChemicalDeferredRegister` supports registering addon chemicals.
 - `mekanism.api.chemical.ChemicalBuilder.builder(ResourceLocation)` supports assigning a chemical icon path.
 - `mekanism.api.chemical.ChemicalBuilder.tint(int)` supports tinting the chemical texture.
-- `mekanism.api.chemical.Chemical.isGaseous()` checks both its legacy builder flag and the `mekanism:chemical/gaseous` tag. The addon uses the tag path to avoid the deprecated `ChemicalBuilder.gaseous()` method.
+- `mekanism.api.chemical.Chemical.isGaseous()` checks both its legacy builder flag and the `mekanism:chemical/gaseous` tag. The addon uses both paths for now because the full-pack test showed the custom chemical could enter the Chemical Injection Chamber but did not process the recipe with tag-only registration.
+- Mekanism's default chemical texture builder path uses the `liquid/...` texture convention. The addon now points the chemical icon at `techcraft_additions:liquid/otherside_atmosphere`.
 - `mekanism:injecting` recipes consume an item plus a chemical and output an item, matching the rift attunement need.
 
 Verified Mekanism: MoreMachine behaviour:
@@ -109,7 +110,7 @@ Assumption:
 
 ## Recipe Balance Notes
 
-The first vertical slice uses `1000` mB of Otherside Atmosphere per rift with `per_tick_usage: false`. This makes the step easy to reason about during testing: collect one bucket-equivalent chemical amount, inject one Dimensional Rift, receive one Otherside Attuned Rift.
+The first vertical slice now follows Mekanism's own Chemical Injection Chamber recipe pattern: `1` mB chemical input with `per_tick_usage: true`. The previous `1000` mB one-shot recipe loaded but did not process during full-pack testing.
 
 The Ambient Gas Collector's production rate and energy usage remain controlled by MekMM's existing configuration. Per-dimension output is controlled by the addon mixin because MekMM does not expose that as data.
 
@@ -125,6 +126,14 @@ $env:TECHCRAFT_DEV_INSTANCE='D:\profiles\Dev-TechCraft'
 ```
 
 Result: `BUILD SUCCESSFUL`.
+
+Follow-up fix after in-game testing:
+
+- The chemical texture path was changed from `chemical/otherside_atmosphere` to `liquid/otherside_atmosphere`.
+- The texture was regenerated from vanilla `minecraft:block/sculk` colors.
+- The legacy `ChemicalBuilder.gaseous()` flag was restored alongside the gaseous tag for compatibility. This intentionally produces a compile deprecation warning in Mekanism `10.7.19`.
+- The injecting recipe was changed from `1000` mB one-shot consumption to `1` mB per-tick consumption.
+- KubeJS helper scripts were changed from `globalThis.TechCraftAdditions` to `global.TechCraftAdditions` because the installed KubeJS/Rhino environment did not define `globalThis`.
 
 ```powershell
 $env:JAVA_HOME='C:\Program Files\Java\jdk-21.0.11'
@@ -168,6 +177,8 @@ Result: installed the built addon JAR into `D:\profiles\Dev-TechCraft\mods` afte
 
 No automated full-pack client launch was run by Codex. The `Dev-TechCraft` folder did not expose a clear safe launch script, and the existing logs predated this install.
 
-Pending in-game verification:
+Pending in-game verification after the follow-up fix:
 
-- In-game Dev-TechCraft verification of collection by dimension, chemical rendering, EMI recipe display, and Chemical Injection Chamber crafting.
+- Dev-TechCraft verification that the chemical no longer renders as the missing-texture tile.
+- Dev-TechCraft verification that the Chemical Injection Chamber now processes `techcraft_additions:dimensional_rift` into `techcraft_additions:otherside_attuned_rift`.
+- Dev-TechCraft verification that the KubeJS temporary recipes reload without `globalThis` errors.

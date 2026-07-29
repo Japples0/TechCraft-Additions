@@ -15,8 +15,9 @@ public final class ModChemicals {
 
     public static final DeferredChemical<Chemical> OTHERSIDE_ATMOSPHERE =
             CHEMICALS.register("otherside_atmosphere", () -> new Chemical(
-                    ChemicalBuilder.builder(TechCraftAdditions.id("chemical/otherside_atmosphere"))
+                    ChemicalBuilder.builder(TechCraftAdditions.id("liquid/otherside_atmosphere"))
                             .tint(OTHERSIDE_ATMOSPHERE_TINT)
+                            .gaseous()
             ));
 
     private ModChemicals() {

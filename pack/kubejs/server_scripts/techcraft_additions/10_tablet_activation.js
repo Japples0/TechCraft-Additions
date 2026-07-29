@@ -1,5 +1,5 @@
 ServerEvents.recipes(event => {
-  const TCA = globalThis.TechCraftAdditions
+  const TCA = global.TechCraftAdditions
   if (!TCA || !TCA.developmentRecipesEnabled) return
 
   event.shaped(TCA.item('dark_world_engine_tablet'), [

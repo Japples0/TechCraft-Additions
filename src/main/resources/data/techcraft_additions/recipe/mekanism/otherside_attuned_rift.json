@@ -1,7 +1,7 @@
 {
   "type": "mekanism:injecting",
   "chemical_input": {
-    "amount": 1000,
+    "amount": 1,
     "chemical": "techcraft_additions:otherside_atmosphere"
   },
   "item_input": {
@@ -12,5 +12,5 @@
     "count": 1,
     "id": "techcraft_additions:otherside_attuned_rift"
   },
-  "per_tick_usage": false
+  "per_tick_usage": true
 }
