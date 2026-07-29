@@ -9,7 +9,15 @@ pluginManagement {
 dependencyResolutionManagement {
     repositories {
         mavenLocal()
-        maven { url = uri("D:/meta/libraries") }
+        def techcraftLocalMaven = providers.gradleProperty("techcraft.localMaven")
+                .orElse(providers.environmentVariable("TECHCRAFT_LOCAL_MAVEN"))
+                .orNull
+        if (techcraftLocalMaven != null && !techcraftLocalMaven.isBlank()) {
+            maven {
+                name = "TechCraftLocalMaven"
+                url = uri(techcraftLocalMaven)
+            }
+        }
         maven { url = "https://maven.neoforged.net/releases" }
         mavenCentral()
     }
