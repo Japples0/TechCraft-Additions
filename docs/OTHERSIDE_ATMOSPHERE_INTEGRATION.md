@@ -10,6 +10,8 @@ Verified implemented:
 
 - Registered `techcraft_additions:otherside_atmosphere` as a Mekanism chemical.
 - Added a sculk-derived Mekanism chemical texture at `assets/techcraft_additions/textures/liquid/otherside_atmosphere.png`.
+- Added animation metadata at `assets/techcraft_additions/textures/liquid/otherside_atmosphere.png.mcmeta`.
+- Added `assets/minecraft/atlases/blocks.json` so the chemical sprite is stitched into the block atlas used by Mekanism chemical rendering.
 - Added `techcraft_additions:otherside_atmosphere` to Mekanism's `mekanism:chemical/gaseous` chemical tag.
 - Added English display text for `chemical.techcraft_additions.otherside_atmosphere`.
 - Added a Mekanism Chemical Injection Chamber recipe:
@@ -64,6 +66,7 @@ Verified Mekanism API/classes:
 - `mekanism.api.chemical.ChemicalBuilder.tint(int)` supports tinting the chemical texture.
 - `mekanism.api.chemical.Chemical.isGaseous()` checks both its legacy builder flag and the `mekanism:chemical/gaseous` tag. The addon uses both paths for now because the full-pack test showed the custom chemical could enter the Chemical Injection Chamber but did not process the recipe with tag-only registration.
 - Mekanism's default chemical texture builder path uses the `liquid/...` texture convention. The addon now points the chemical icon at `techcraft_additions:liquid/otherside_atmosphere`.
+- `mekanism.client.render.MekanismRenderer.getChemicalTexture` gets the chemical icon and resolves it from `TextureAtlas.LOCATION_BLOCKS`. Custom chemical textures therefore need a block-atlas source entry; merely placing the PNG in the JAR is not enough.
 - `mekanism:injecting` recipes consume an item plus a chemical and output an item, matching the rift attunement need.
 
 Verified Mekanism: MoreMachine behaviour:
@@ -131,9 +134,10 @@ Follow-up fix after in-game testing:
 
 - The chemical texture path was changed from `chemical/otherside_atmosphere` to `liquid/otherside_atmosphere`.
 - The texture was regenerated from vanilla `minecraft:block/sculk` colors.
+- A follow-up texture fix made the texture animated and added the block atlas source entry required by Mekanism's renderer.
 - The legacy `ChemicalBuilder.gaseous()` flag was restored alongside the gaseous tag for compatibility. This intentionally produces a compile deprecation warning in Mekanism `10.7.19`.
 - The injecting recipe was changed from `1000` mB one-shot consumption to `1` mB per-tick consumption.
-- KubeJS helper scripts were changed from `globalThis.TechCraftAdditions` to `global.TechCraftAdditions` because the installed KubeJS/Rhino environment did not define `globalThis`.
+- KubeJS helper scripts were changed from shared globals to local helper objects because the installed KubeJS/Rhino environment did not define `globalThis` and also rejected assignment to `global`.
 
 ```powershell
 $env:JAVA_HOME='C:\Program Files\Java\jdk-21.0.11'
@@ -175,10 +179,15 @@ Copy-Item build\libs\techcraft-additions-0.1.0.jar D:\profiles\Dev-TechCraft\mod
 
 Result: installed the built addon JAR into `D:\profiles\Dev-TechCraft\mods` after backing up any previous addon JAR.
 
+The latest follow-up build was also synced and installed into `D:\profiles\Dev-TechCraft`. The installed JAR contains:
+
+- `assets/minecraft/atlases/blocks.json`
+- `assets/techcraft_additions/textures/liquid/otherside_atmosphere.png`
+- `assets/techcraft_additions/textures/liquid/otherside_atmosphere.png.mcmeta`
+
 No automated full-pack client launch was run by Codex. The `Dev-TechCraft` folder did not expose a clear safe launch script, and the existing logs predated this install.
 
 Pending in-game verification after the follow-up fix:
 
 - Dev-TechCraft verification that the chemical no longer renders as the missing-texture tile.
-- Dev-TechCraft verification that the Chemical Injection Chamber now processes `techcraft_additions:dimensional_rift` into `techcraft_additions:otherside_attuned_rift`.
-- Dev-TechCraft verification that the KubeJS temporary recipes reload without `globalThis` errors.
+- Dev-TechCraft verification that the KubeJS temporary recipes reload without `globalThis` or `global` errors.

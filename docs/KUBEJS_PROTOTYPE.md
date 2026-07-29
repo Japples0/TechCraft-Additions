@@ -74,19 +74,19 @@ Exceptions:
 
 ## Development Flag
 
-`00_development_helpers.js` defines:
+Each KubeJS recipe script now defines a local helper object:
 
 ```js
-global.TechCraftAdditions = {
+const TCA = {
   developmentRecipesEnabled: true,
   item: id => `techcraft_additions:${id}`,
   developmentId: id => `techcraft_additions:development/${id}`
 }
 ```
 
-In the installed KubeJS/Rhino environment this object is implemented as `global.TechCraftAdditions`; older documentation examples may show `globalThis`, but `globalThis` is not available in Dev-TechCraft.
+The installed KubeJS/Rhino environment does not define `globalThis` and rejects assignment to `global` from server scripts, so the prototype intentionally avoids shared globals.
 
-Set `developmentRecipesEnabled` to `false` when replacing the temporary recipes with real progression recipes. This disables every staged prototype recipe without deleting the files.
+Set a script's local `developmentRecipesEnabled` value to `false` when replacing that temporary recipe group with real progression recipes.
 
 ## Chain Summary
 
