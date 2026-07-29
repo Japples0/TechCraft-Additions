@@ -12,10 +12,10 @@ public final class ModItems {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, TechCraftAdditions.MOD_ID);
 
     public static final DeferredHolder<Item, Item> DARK_WORLD_ENGINE_TABLET =
-            registerLoreItem("dark_world_engine_tablet");
+            registerLoreItem("dark_world_engine_tablet", new Item.Properties().stacksTo(1));
 
     public static final DeferredHolder<Item, Item> ILLUMINATED_WORLD_ENGINE_TABLET =
-            registerLoreItem("illuminated_world_engine_tablet");
+            registerLoreItem("illuminated_world_engine_tablet", new Item.Properties().stacksTo(1));
 
     public static final DeferredHolder<Item, Item> SHATTERED_HEART =
             registerLoreItem("shattered_heart");
@@ -69,7 +69,11 @@ public final class ModItems {
     }
 
     private static DeferredHolder<Item, Item> registerLoreItem(String name) {
-        return ITEMS.register(name, () -> new LoreItem(new Item.Properties(), "item.techcraft_additions." + name + ".lore"));
+        return registerLoreItem(name, new Item.Properties());
+    }
+
+    private static DeferredHolder<Item, Item> registerLoreItem(String name, Item.Properties properties) {
+        return ITEMS.register(name, () -> new LoreItem(properties, "item.techcraft_additions." + name + ".lore"));
     }
 
     public static void register(IEventBus modEventBus) {
