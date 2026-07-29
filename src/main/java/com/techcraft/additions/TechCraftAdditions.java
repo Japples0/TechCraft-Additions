@@ -7,10 +7,13 @@ import com.techcraft.additions.registry.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Mod(TechCraftAdditions.MOD_ID)
 public final class TechCraftAdditions {
     public static final String MOD_ID = "techcraft_additions";
+    public static final Logger LOGGER = LoggerFactory.getLogger("TechCraft Additions");
 
     public TechCraftAdditions(IEventBus modEventBus) {
         ModChemicals.register(modEventBus);

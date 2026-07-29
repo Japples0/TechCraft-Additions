@@ -1,10 +1,9 @@
 package com.techcraft.additions.mixin;
 
-import com.techcraft.additions.registry.ModChemicals;
+import com.techcraft.additions.integration.DimensionAtmospheres;
 import mekanism.api.chemical.Chemical;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,19 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(targets = "com.jerry.mekmm.common.tile.machine.TileEntityAmbientGasCollector")
 public abstract class AmbientGasCollectorMixin {
-    private static final ResourceLocation OTHERSIDE_DIMENSION =
-            ResourceLocation.fromNamespaceAndPath("deeperdarker", "otherside");
-
     @Inject(method = "suck", at = @At("HEAD"), cancellable = true, remap = false)
     private void techcraft_additions$limitAtmosphereDimensions(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         Level level = ((BlockEntity) (Object) this).getLevel();
-        if (level == null) {
-            cir.setReturnValue(false);
-            return;
-        }
-
-        ResourceLocation dimension = level.dimension().location();
-        if (!Level.OVERWORLD.location().equals(dimension) && !OTHERSIDE_DIMENSION.equals(dimension)) {
+        if (level == null || DimensionAtmospheres.getAtmosphere(level).isEmpty()) {
             cir.setReturnValue(false);
         }
     }
@@ -44,8 +34,8 @@ public abstract class AmbientGasCollectorMixin {
     )
     private Holder<Chemical> techcraft_additions$selectAtmosphereChemical(Holder<Chemical> original) {
         Level level = ((BlockEntity) (Object) this).getLevel();
-        if (level != null && OTHERSIDE_DIMENSION.equals(level.dimension().location())) {
-            return ModChemicals.OTHERSIDE_ATMOSPHERE;
+        if (level != null) {
+            return DimensionAtmospheres.getAtmosphere(level).orElse(original);
         }
         return original;
     }

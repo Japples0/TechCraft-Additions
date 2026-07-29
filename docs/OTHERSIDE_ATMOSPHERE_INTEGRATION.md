@@ -2,7 +2,7 @@
 
 Date: 2026-07-29
 
-This document covers the vertical slice that replaces the temporary Otherside Attuned Rift shapeless recipe with a Mekanism chemical pipeline.
+This document covers the original vertical slice that replaced the temporary Otherside Attuned Rift shapeless recipe with a Mekanism chemical pipeline. The generalized atmosphere system is now documented in `docs/DIMENSIONAL_ATMOSPHERES.md`.
 
 ## Implemented Scope
 
@@ -23,7 +23,7 @@ Verified implemented:
   - `per_tick_usage`: `true`
 - Removed only the temporary KubeJS shapeless recipe for `techcraft_additions:otherside_attuned_rift`.
 - Preserved the existing Overworld collection path for `mekmm:unstable_dimensional_gas`.
-- Prevented MekMM's Ambient Gas Collector from producing gas in dimensions other than the Overworld and Otherside.
+- Prevented MekMM's Ambient Gas Collector from producing gas in unmapped dimensions. The current generalized mapping includes Overworld, Nether, End and Otherside.
 
 Not implemented:
 

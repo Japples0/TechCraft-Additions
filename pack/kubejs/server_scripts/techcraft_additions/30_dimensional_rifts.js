@@ -24,18 +24,6 @@ ServerEvents.recipes(event => {
     'minecraft:emerald'
   ]).id(TCA.developmentId('overworld_attuned_rift'))
 
-  event.shapeless(TCA.item('nether_attuned_rift'), [
-    TCA.item('dimensional_rift'),
-    'minecraft:netherrack',
-    'minecraft:blaze_powder'
-  ]).id(TCA.developmentId('nether_attuned_rift'))
-
-  event.shapeless(TCA.item('end_attuned_rift'), [
-    TCA.item('dimensional_rift'),
-    'minecraft:end_stone',
-    'minecraft:chorus_fruit'
-  ]).id(TCA.developmentId('end_attuned_rift'))
-
   event.shapeless(TCA.item('draconic_attuned_rift'), [
     TCA.item('dimensional_rift'),
     'draconicevolution:draconium_dust',
