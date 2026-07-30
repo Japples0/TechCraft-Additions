@@ -1,0 +1,48 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "draconicevolution"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "deeperdarker"
+    }
+  ],
+  "type": "draconicevolution:fusion_crafting",
+  "catalyst": {
+    "item": "techcraft_additions:otherside_attuned_rift"
+  },
+  "ingredients": [
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "techcraft_additions:dimensional_rift_core"
+      }
+    },
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "deeperdarker:heart_of_the_deep"
+      }
+    },
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "deeperdarker:resonarium"
+      }
+    },
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "deeperdarker:reinforced_echo_shard"
+      }
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "techcraft_additions:otherside_attuned_rift_core"
+  },
+  "techLevel": "draconium",
+  "totalEnergy": 4000000
+}

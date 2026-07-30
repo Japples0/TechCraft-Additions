@@ -1,0 +1,95 @@
+plugins {
+    id "java-library"
+    id "idea"
+    id "eclipse"
+    id "net.neoforged.moddev" version "2.0.141"
+}
+
+group = mod_group_id
+version = mod_version
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+def techcraftDevInstanceProvider = providers.gradleProperty("techcraft.devInstance")
+        .orElse(providers.environmentVariable("TECHCRAFT_DEV_INSTANCE"))
+
+def techcraftPackJar = { String fileName ->
+    def devInstancePath = techcraftDevInstanceProvider.orNull
+    if (devInstancePath == null || devInstancePath.isBlank()) {
+        throw new GradleException("Set TECHCRAFT_DEV_INSTANCE or -Ptechcraft.devInstance so Mekanism/MekMM compile jars can be resolved.")
+    }
+    def jarFile = file("${devInstancePath}/mods/${fileName}")
+    if (!jarFile.isFile()) {
+        throw new GradleException("Required TechCraft pack jar is missing: ${jarFile}")
+    }
+    jarFile
+}
+
+dependencies {
+    compileOnly files(
+            techcraftPackJar("Mekanism-1.21.1-10.7.19.85.jar"),
+            techcraftPackJar("mekmm-1.21.1-1.4.0.jar")
+    )
+    runtimeOnly files(
+            techcraftPackJar("Mekanism-1.21.1-10.7.19.85.jar"),
+            techcraftPackJar("mekmm-1.21.1-1.4.0.jar"),
+            techcraftPackJar("deeperdarker-neoforge-1.21.1-1.4.1.jar")
+    )
+}
+
+neoForge {
+    version = neo_version
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+
+    runs {
+        configureEach {
+            systemProperty "forge.logging.markers", "REGISTRIES"
+            systemProperty "neoforge.enabledGameTestNamespaces", mod_id
+        }
+
+        client {
+            client()
+        }
+
+        server {
+            server()
+            programArgument "--nogui"
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            gameDirectory = file("run-gametest")
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def replaceProperties = [
+        minecraft_version      : minecraft_version,
+        minecraft_version_range: minecraft_version_range,
+        neo_version            : neo_version,
+        neo_version_range      : neo_version_range,
+        loader_version_range   : loader_version_range,
+        mod_id                 : mod_id,
+        mod_name               : mod_name,
+        mod_license            : mod_license,
+        mod_version            : mod_version,
+        mod_authors            : mod_authors,
+        mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand replaceProperties
+    }
+}

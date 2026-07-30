@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "techcraft_additions:item/dark_world_engine_tablet"
+  }
+}

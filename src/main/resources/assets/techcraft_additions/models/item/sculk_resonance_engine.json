@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "techcraft_additions:item/sculk_resonance_engine"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "techcraft_additions:liquid/nether_atmosphere"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "techcraft_additions:liquid/end_atmosphere"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "techcraft_additions:liquid/otherside_atmosphere"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "techcraft_additions:nether_atmosphere",
+    "techcraft_additions:end_atmosphere",
+    "techcraft_additions:otherside_atmosphere"
+  ]
+}

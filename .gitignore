@@ -1,0 +1,8 @@
+.gradle/
+build/
+run/
+run-gametest/
+out/
+.scratch/
+*.log
+ChatGPT Image Jul 29, 2026, 06_34_36 PM.png
