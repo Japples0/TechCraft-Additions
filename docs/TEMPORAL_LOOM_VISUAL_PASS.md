@@ -103,6 +103,63 @@ attenuated events with an explicit multi-Loom volume cap.
 
 ## Verification
 
-Commands, in-game observations, measured performance and known limitations will be recorded after
-implementation and testing.
+Commands run:
 
+```powershell
+$env:JAVA_HOME='C:\Program Files\Java\jdk-24'
+$env:TECHCRAFT_DEV_INSTANCE='D:\profiles\Dev-TechCraft'
+python tools\build_temporal_loom_render_textures.py
+.\gradlew.bat compileJava processResources --stacktrace
+.\gradlew.bat runGameTestServer --stacktrace
+.\gradlew.bat clean build --stacktrace
+.\gradlew.bat runClient --stacktrace
+```
+
+Verified results:
+
+- Clean production build succeeds for Minecraft 1.21.1 and NeoForge 21.1.235.
+- The dedicated GameTest server starts on Java 21.0.11 and all six required tests pass.
+- The successful-output test proves the visual timestamp is written only after item insertion.
+- The output-full test proves blocked production does not arm the output animation.
+- A dedicated server starts with the client renderer present, proving distribution isolation.
+- The isolated client reaches complete resource initialization with no TechCraft Additions renderer,
+  model, texture or class-linkage errors.
+- Generated and deployed JAR SHA-256 values match.
+- The prior Dev-TechCraft JAR is backed up before deployment.
+
+The full TechCraft in-world visual pass remains a manual checkpoint. The build is deployed to
+`D:\profiles\Dev-TechCraft\mods\techcraft-additions-0.1.0.jar`, but no existing development save was
+opened automatically. Orientation, active-state appearance, shader compatibility and measured FPS
+must be assessed around a formed Loom in a disposable world.
+
+## Performance observations
+
+The implemented budget is bounded rather than inferred from frame rate:
+
+- Dormant Looms draw the two cached-sample rings and singularity but no ribbon strands.
+- Harvesting is the maximum load at 10 strands, 12 base segments and at most three highlight
+  segments per strand.
+- The renderer returns before geometry submission when the Loom is unformed or farther than 48
+  blocks from the camera.
+- No collections, geometry caches or event maps grow while the renderer runs.
+- State profiles, loop samples, strand seeds, textures and render types are static and shared.
+
+One-Loom and two-Loom FPS deltas are not yet measured and are therefore not claimed.
+
+## Known visual limitations
+
+- The ordinary construction blocks remain visible by design; this pass layers the formed
+  presentation through and around them rather than replacing their baked models.
+- The singularity uses two animated billboard layers instead of a shader-distorted sphere.
+- Temporal strands use bounded translucent ribbons and may need width tuning with the full shader
+  stack.
+- State changes are immediate; cross-fades can be added after the first in-world composition pass.
+- Sound is deferred.
+- No measured two-Loom performance result exists until the full-pack in-world pass is completed.
+
+## Recommended second polish pass
+
+Use front, quarter-angle and side screenshots from the deployed full pack to tune ring radii,
+physical-block intersections, strand curvature, singularity scale and brightness. Measure dormant,
+one-active and two-active FPS with shaders disabled and enabled before adding state cross-fades or
+transition-triggered sound.

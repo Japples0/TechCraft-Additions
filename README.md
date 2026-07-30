@@ -19,8 +19,15 @@ This branch contains a visible prototype of the endgame progression chain:
 - Temporary KubeJS shaped/shapeless recipes staged under `pack/kubejs`, except where a prototype recipe has already been replaced by a real integration.
 - A real Oritech Particle Accelerator recipe for `techcraft_additions:shattered_heart`.
 - A real Mekanism chemical plus Chemical Injection Chamber recipe for `techcraft_additions:otherside_attuned_rift`.
+- A functional 7x5x5 Temporal Loom with persistent FE, output and upgrade storage, a tested production
+  state machine, diagnostics and six dedicated-server GameTests.
+- The Temporal Loom's first complete hybrid 3D presentation: procedural infinity loops, inner
+  amethyst resonance tracks, a black-violet singularity, state-driven gold temporal strands,
+  conditional Descender geometry and a synchronized successful-output thread.
 
-No Dark World Engine multiblock logic, teleportation, chunk loading, custom rendering, or final third-party machine balance is implemented yet.
+Dark World Engine multiblock logic, teleportation, chunk loading and final third-party machine
+balance are not implemented yet. The Temporal Loom rendering architecture and verified limits are
+documented in `docs/TEMPORAL_LOOM_VISUAL_PASS.md`.
 
 ## Build
 
