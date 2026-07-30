@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "techcraft_additions:item/draconic_attuned_rift_core"
+  }
+}

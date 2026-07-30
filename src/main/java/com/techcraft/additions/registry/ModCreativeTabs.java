@@ -29,6 +29,12 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.END_ATTUNED_RIFT.get());
                         output.accept(ModItems.OTHERSIDE_ATTUNED_RIFT.get());
                         output.accept(ModItems.DRACONIC_ATTUNED_RIFT.get());
+                        output.accept(ModItems.DIMENSIONAL_RIFT_CORE.get());
+                        output.accept(ModItems.OVERWORLD_ATTUNED_RIFT_CORE.get());
+                        output.accept(ModItems.NETHER_ATTUNED_RIFT_CORE.get());
+                        output.accept(ModItems.END_ATTUNED_RIFT_CORE.get());
+                        output.accept(ModItems.OTHERSIDE_ATTUNED_RIFT_CORE.get());
+                        output.accept(ModItems.DRACONIC_ATTUNED_RIFT_CORE.get());
                         output.accept(ModItems.TERRESTRIAL_LATTICE.get());
                         output.accept(ModItems.OTHERWORLDLY_FRAGMENT.get());
                         output.accept(ModItems.DIMENSIONAL_DESCENDER.get());

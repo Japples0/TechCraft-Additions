@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "type": "draconicevolution:fusion_crafting",
+  "catalyst": {
+    "item": "techcraft_additions:end_attuned_rift"
+  },
+  "ingredients": [
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "techcraft_additions:dimensional_rift_core"
+      }
+    },
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "minecraft:end_stone"
+      }
+    },
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "minecraft:chorus_fruit"
+      }
+    },
+    {
+      "consume": true,
+      "ingredient": {
+        "item": "minecraft:ender_eye"
+      }
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "techcraft_additions:end_attuned_rift_core"
+  },
+  "techLevel": "draconium",
+  "totalEnergy": 2000000
+}

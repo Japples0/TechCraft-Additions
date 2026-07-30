@@ -41,6 +41,24 @@ public final class ModItems {
     public static final DeferredHolder<Item, Item> DRACONIC_ATTUNED_RIFT =
             registerLoreItem("draconic_attuned_rift");
 
+    public static final DeferredHolder<Item, Item> DIMENSIONAL_RIFT_CORE =
+            registerLoreItem("dimensional_rift_core");
+
+    public static final DeferredHolder<Item, Item> OVERWORLD_ATTUNED_RIFT_CORE =
+            registerLoreItem("overworld_attuned_rift_core");
+
+    public static final DeferredHolder<Item, Item> NETHER_ATTUNED_RIFT_CORE =
+            registerLoreItem("nether_attuned_rift_core");
+
+    public static final DeferredHolder<Item, Item> END_ATTUNED_RIFT_CORE =
+            registerLoreItem("end_attuned_rift_core");
+
+    public static final DeferredHolder<Item, Item> OTHERSIDE_ATTUNED_RIFT_CORE =
+            registerLoreItem("otherside_attuned_rift_core");
+
+    public static final DeferredHolder<Item, Item> DRACONIC_ATTUNED_RIFT_CORE =
+            registerLoreItem("draconic_attuned_rift_core");
+
     public static final DeferredHolder<Item, Item> TERRESTRIAL_LATTICE =
             registerLoreItem("terrestrial_lattice");
 
