@@ -11,7 +11,7 @@ from PIL import Image
 
 FRAME_SIZE = 64
 FRAME_COUNT = 16
-FRAME_TIME = 6
+FRAME_TIME = 3
 TEXTURE_DIR = (
     Path(__file__).parents[1]
     / "src/main/resources/assets/techcraft_additions/textures/item"
@@ -127,8 +127,16 @@ def animate_frame(base: Image.Image, frame_index: int, name: str) -> Image.Image
         for x in range(22, 42):
             mask = teardrop_weight(x, y)
             red, green, blue, alpha = source[x, y]
-            if mask == 0.0 or alpha == 0:
+            if mask == 0.0:
                 continue
+
+            if alpha == 0:
+                if name != "overworld_attuned_rift_core":
+                    continue
+                # The original Overworld chroma key removed real portal pixels.
+                # Reconstruct the fixed teardrop field before animating it.
+                red, green, blue = tuple(round(channel * 0.28) for channel in primary)
+                alpha = 255
 
             dx = (x - 31.5) / 7.4
             dy = (y - 31.0) / 18.0
@@ -178,7 +186,7 @@ def write_animation(name: str) -> None:
     metadata = {
         "animation": {
             "frametime": FRAME_TIME,
-            "interpolate": False,
+            "interpolate": True,
         }
     }
     path.with_suffix(".png.mcmeta").write_text(
