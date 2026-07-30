@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "techcraft_additions:block/temporal_loom_controller_top",
+    "front": "techcraft_additions:block/temporal_loom_controller_front",
+    "side": "techcraft_additions:block/temporal_loom_controller_side"
+  }
+}

@@ -45,6 +45,13 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.ECHOES_OF_TOMORROW.get());
                         output.accept(ModBlocks.RESONANCE_CASING.get());
                         output.accept(ModBlocks.SCULK_RESONANCE_CONTROLLER.get());
+                        output.accept(ModBlocks.TEMPORAL_LOOM_CONTROLLER.get());
+                        output.accept(ModBlocks.TEMPORAL_ANCHOR.get());
+                        output.accept(ModBlocks.TIME_SPINDLE.get());
+                        output.accept(ModBlocks.AMETHYST_RESONATOR.get());
+                        output.accept(ModBlocks.DESCENDER_MOUNT.get());
+                        output.accept(ModBlocks.OUTPUT_SHUTTLE.get());
+                        output.accept(ModBlocks.ENERGY_CONDUIT.get());
                     })
                     .build());
 

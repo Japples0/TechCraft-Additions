@@ -1,6 +1,8 @@
 package com.techcraft.additions.registry;
 
 import com.techcraft.additions.TechCraftAdditions;
+import com.techcraft.additions.block.TemporalLoomControllerBlock;
+import com.techcraft.additions.block.TemporalLoomPartBlock;
 import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
@@ -18,17 +20,38 @@ public final class ModBlocks {
 
     public static final DeferredHolder<Block, Block> RESONANCE_CASING = registerBlock(
             "resonance_casing",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK).strength(3.0F, 6.0F).sound(SoundType.SCULK)));
+            () -> new TemporalLoomPartBlock(loomProperties()));
 
     public static final DeferredHolder<Block, Block> SCULK_RESONANCE_CONTROLLER = registerBlock(
             "sculk_resonance_controller",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SCULK_CATALYST).strength(4.0F, 9.0F).sound(SoundType.SCULK_CATALYST)));
 
+    public static final DeferredHolder<Block, TemporalLoomControllerBlock> TEMPORAL_LOOM_CONTROLLER = registerBlock(
+            "temporal_loom_controller",
+            () -> new TemporalLoomControllerBlock(loomProperties().lightLevel(state -> state.getValue(TemporalLoomControllerBlock.LIT) ? 10 : 2)));
+
+    public static final DeferredHolder<Block, Block> TEMPORAL_ANCHOR = registerLoomPart("temporal_anchor", 5);
+    public static final DeferredHolder<Block, Block> TIME_SPINDLE = registerLoomPart("time_spindle", 8);
+    public static final DeferredHolder<Block, Block> AMETHYST_RESONATOR = registerLoomPart("amethyst_resonator", 9);
+    public static final DeferredHolder<Block, Block> DESCENDER_MOUNT = registerLoomPart("descender_mount", 4);
+    public static final DeferredHolder<Block, Block> OUTPUT_SHUTTLE = registerLoomPart("output_shuttle", 7);
+    public static final DeferredHolder<Block, Block> ENERGY_CONDUIT = registerLoomPart("energy_conduit", 6);
+
     private ModBlocks() {
     }
 
-    private static DeferredHolder<Block, Block> registerBlock(String name, Supplier<Block> block) {
-        DeferredHolder<Block, Block> registeredBlock = BLOCKS.register(name, block);
+    private static BlockBehaviour.Properties loomProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_TILES)
+                .strength(4.0F, 12.0F)
+                .sound(SoundType.NETHERITE_BLOCK);
+    }
+
+    private static DeferredHolder<Block, Block> registerLoomPart(String name, int lightLevel) {
+        return registerBlock(name, () -> new TemporalLoomPartBlock(loomProperties().lightLevel(state -> lightLevel)));
+    }
+
+    private static <T extends Block> DeferredHolder<Block, T> registerBlock(String name, Supplier<T> block) {
+        DeferredHolder<Block, T> registeredBlock = BLOCKS.register(name, block);
         ModBlockItems.registerBlockItem(name, registeredBlock);
         return registeredBlock;
     }

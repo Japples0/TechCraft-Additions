@@ -55,5 +55,12 @@
   "chemical.techcraft_additions.otherside_atmosphere": "Otherside Atmosphere",
   "description.techcraft_additions.otherside_atmosphere": "Air from below memory, saturated with violet sculk resonance.",
   "block.techcraft_additions.resonance_casing": "Resonance Casing",
-  "block.techcraft_additions.sculk_resonance_controller": "Sculk Resonance Controller"
+  "block.techcraft_additions.sculk_resonance_controller": "Sculk Resonance Controller",
+  "block.techcraft_additions.temporal_loom_controller": "Temporal Loom Controller",
+  "block.techcraft_additions.temporal_anchor": "Temporal Anchor",
+  "block.techcraft_additions.time_spindle": "Time Spindle",
+  "block.techcraft_additions.amethyst_resonator": "Amethyst Resonator",
+  "block.techcraft_additions.descender_mount": "Descender Mount",
+  "block.techcraft_additions.output_shuttle": "Output Shuttle",
+  "block.techcraft_additions.energy_conduit": "Energy Conduit"
 }
