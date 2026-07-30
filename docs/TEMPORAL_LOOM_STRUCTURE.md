@@ -80,16 +80,17 @@ A.....A
 
 ## Fixed renderer anchors
 
-Anchor coordinates are local block-space coordinates relative to the controller's lower corner.
+Anchor coordinates use horizontal offsets from the controller's centre and vertical distance from
+the controller's base. Positive local `z` points behind the controller.
 
 | Anchor | Local coordinate |
 | --- | --- |
-| Left loop centre | `(-2.0, 2.5, 2.5)` |
-| Right loop centre | `(2.0, 2.5, 2.5)` |
-| Central singularity | `(0.0, 2.5, 2.5)` |
-| Upper Descender | `(0.0, 4.5, 2.5)` |
-| Lower output | `(0.0, 1.5, 2.5)` |
-| Outer anchors | `x=-3/3`, `y=1.5/3.5`, `z=0.5/4.5` |
+| Left loop centre | `(-2.0, 2.5, 2.0)` |
+| Right loop centre | `(2.0, 2.5, 2.0)` |
+| Central singularity | `(0.0, 2.5, 2.0)` |
+| Upper Descender | `(0.0, 4.5, 2.0)` |
+| Lower output | `(0.0, 1.5, 2.0)` |
+| Outer anchors | `x=-3/3`, `y=1.5/3.5`, `z=0/4` |
 
 `TemporalLoomAnchors.toWorld` applies the controller's horizontal rotation. These coordinates are
 the stable contract for the next rendering milestone.

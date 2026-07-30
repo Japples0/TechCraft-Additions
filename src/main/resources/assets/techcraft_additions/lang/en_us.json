@@ -62,5 +62,15 @@
   "block.techcraft_additions.amethyst_resonator": "Amethyst Resonator",
   "block.techcraft_additions.descender_mount": "Descender Mount",
   "block.techcraft_additions.output_shuttle": "Output Shuttle",
-  "block.techcraft_additions.energy_conduit": "Energy Conduit"
+  "block.techcraft_additions.energy_conduit": "Energy Conduit",
+  "message.techcraft_additions.temporal_loom.invalid": "Structure incomplete at %s: expected %s, found %s",
+  "message.techcraft_additions.temporal_loom.status": "Formed: %s | State: %s | Energy: %s/%s FE | Progress: %s%% | Output: %s | Descender: %s",
+  "message.techcraft_additions.temporal_loom.descender_installed": "Dimensional Descender installed (inactive during greybox testing).",
+  "message.techcraft_additions.temporal_loom.descender_removed": "Dimensional Descender removed.",
+  "state.techcraft_additions.temporal_loom.unformed": "Unformed",
+  "state.techcraft_additions.temporal_loom.dormant": "Dormant",
+  "state.techcraft_additions.temporal_loom.searching": "Searching",
+  "state.techcraft_additions.temporal_loom.harvesting": "Harvesting",
+  "state.techcraft_additions.temporal_loom.synthesizing": "Synthesizing",
+  "state.techcraft_additions.temporal_loom.output_blocked": "Output Blocked"
 }

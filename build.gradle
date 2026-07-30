@@ -34,7 +34,8 @@ dependencies {
     )
     runtimeOnly files(
             techcraftPackJar("Mekanism-1.21.1-10.7.19.85.jar"),
-            techcraftPackJar("mekmm-1.21.1-1.4.0.jar")
+            techcraftPackJar("mekmm-1.21.1-1.4.0.jar"),
+            techcraftPackJar("deeperdarker-neoforge-1.21.1-1.4.1.jar")
     )
 }
 
@@ -60,6 +61,11 @@ neoForge {
         server {
             server()
             programArgument "--nogui"
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            gameDirectory = file("run-gametest")
         }
     }
 }

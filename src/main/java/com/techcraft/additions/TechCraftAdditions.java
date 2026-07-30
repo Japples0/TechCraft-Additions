@@ -1,6 +1,8 @@
 package com.techcraft.additions;
 
 import com.techcraft.additions.registry.ModBlocks;
+import com.techcraft.additions.registry.ModBlockEntities;
+import com.techcraft.additions.registry.ModCapabilities;
 import com.techcraft.additions.registry.ModChemicals;
 import com.techcraft.additions.registry.ModCreativeTabs;
 import com.techcraft.additions.registry.ModItems;
@@ -19,7 +21,9 @@ public final class TechCraftAdditions {
         ModChemicals.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        modEventBus.addListener(ModCapabilities::register);
     }
 
     public static ResourceLocation id(String path) {

@@ -6,16 +6,16 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.phys.Vec3;
 
 public final class TemporalLoomAnchors {
-    public static final Vec3 LEFT_LOOP_CENTER = local(-2.0, 2.5, 2.5);
-    public static final Vec3 RIGHT_LOOP_CENTER = local(2.0, 2.5, 2.5);
-    public static final Vec3 CENTRAL_SINGULARITY = local(0.0, 2.5, 2.5);
-    public static final Vec3 UPPER_DESCENDER = local(0.0, 4.5, 2.5);
-    public static final Vec3 LOWER_OUTPUT = local(0.0, 1.5, 2.5);
+    public static final Vec3 LEFT_LOOP_CENTER = local(-2.0, 2.5, 2.0);
+    public static final Vec3 RIGHT_LOOP_CENTER = local(2.0, 2.5, 2.0);
+    public static final Vec3 CENTRAL_SINGULARITY = local(0.0, 2.5, 2.0);
+    public static final Vec3 UPPER_DESCENDER = local(0.0, 4.5, 2.0);
+    public static final Vec3 LOWER_OUTPUT = local(0.0, 1.5, 2.0);
     public static final List<Vec3> OUTER_ANCHORS = List.of(
-            local(-3.0, 1.5, 0.5), local(3.0, 1.5, 0.5),
-            local(-3.0, 1.5, 4.5), local(3.0, 1.5, 4.5),
-            local(-3.0, 3.5, 0.5), local(3.0, 3.5, 0.5),
-            local(-3.0, 3.5, 4.5), local(3.0, 3.5, 4.5));
+            local(-3.0, 1.5, 0.0), local(3.0, 1.5, 0.0),
+            local(-3.0, 1.5, 4.0), local(3.0, 1.5, 4.0),
+            local(-3.0, 3.5, 0.0), local(3.0, 3.5, 0.0),
+            local(-3.0, 3.5, 4.0), local(3.0, 3.5, 4.0));
 
     private TemporalLoomAnchors() {
     }
