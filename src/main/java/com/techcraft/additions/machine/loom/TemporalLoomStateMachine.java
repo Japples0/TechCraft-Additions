@@ -56,6 +56,7 @@ public final class TemporalLoomStateMachine {
         }
 
         if (controller.inventory().insertOutput(output(profile))) {
+            controller.recordSuccessfulOutput();
             controller.setPendingOutput(false);
             controller.transitionTo(TemporalLoomMachineState.DORMANT);
         } else {
@@ -69,6 +70,7 @@ public final class TemporalLoomStateMachine {
         ItemStack result = output(profile);
         if (controller.hasPendingOutput()) {
             if (controller.inventory().insertOutput(result)) {
+                controller.recordSuccessfulOutput();
                 controller.setPendingOutput(false);
                 controller.transitionTo(TemporalLoomMachineState.DORMANT);
             }

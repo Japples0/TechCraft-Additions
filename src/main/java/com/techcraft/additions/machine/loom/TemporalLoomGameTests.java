@@ -55,6 +55,8 @@ public final class TemporalLoomGameTests {
     @GameTest(template = "empty", timeoutTicks = 40)
     public static void consumesEnergyAndProducesLooseTime(GameTestHelper helper) {
         TemporalLoomControllerBlockEntity controller = formedController(helper);
+        helper.assertTrue(controller.lastSuccessfulOutputGameTime() == -1L,
+                "Output visual timestamp started armed");
         addEnergy(controller, 500_000);
         for (int tick = 0; tick < 401; tick++) {
             TemporalLoomStateMachine.tick(controller);
@@ -67,6 +69,8 @@ public final class TemporalLoomGameTests {
         ItemStack output = controller.outputCapability().getStackInSlot(0);
         helper.assertTrue(output.is(ModItems.LOOSE_STRANDS_OF_TIME.get()) && output.getCount() == 1,
                 "Controller did not produce one Loose Strands of Time");
+        helper.assertTrue(controller.lastSuccessfulOutputGameTime() == helper.getLevel().getGameTime(),
+                "Successful output did not record its server game time");
         helper.succeed();
     }
 
@@ -78,6 +82,8 @@ public final class TemporalLoomGameTests {
         TemporalLoomStateMachine.tick(controller);
         helper.assertTrue(controller.machineState() == TemporalLoomMachineState.OUTPUT_BLOCKED,
                 "Full output did not block the controller");
+        helper.assertTrue(controller.lastSuccessfulOutputGameTime() == -1L,
+                "Blocked output incorrectly armed the output visual");
 
         controller.outputCapability().extractItem(0, 64, false);
         TemporalLoomStateMachine.tick(controller);
@@ -91,6 +97,7 @@ public final class TemporalLoomGameTests {
         TemporalLoomControllerBlockEntity controller = formedController(helper);
         addEnergy(controller, 250_000);
         controller.inventory().installDescender(new ItemStack(ModItems.DIMENSIONAL_DESCENDER.get()));
+        controller.recordSuccessfulOutput();
         TemporalLoomStateMachine.tick(controller);
         for (int tick = 0; tick < 20; tick++) {
             TemporalLoomStateMachine.tick(controller);
@@ -109,6 +116,8 @@ public final class TemporalLoomGameTests {
         helper.assertTrue(restored.energyCapability().getEnergyStored() == 230_000,
                 "Stored energy was not restored");
         helper.assertTrue(restored.inventory().hasDescender(), "Descender inventory was not restored");
+        helper.assertTrue(restored.lastSuccessfulOutputGameTime() == controller.lastSuccessfulOutputGameTime(),
+                "Successful output game time was not restored");
         helper.succeed();
     }
 

@@ -32,6 +32,7 @@ public final class TemporalLoomControllerBlockEntity extends BlockEntity {
     private static final String STATE_TAG = "MachineState";
     private static final String PROGRESS_TAG = "Progress";
     private static final String PENDING_OUTPUT_TAG = "PendingOutput";
+    private static final String LAST_SUCCESSFUL_OUTPUT_TAG = "LastSuccessfulOutputGameTime";
     private static final String ENERGY_TAG = "Energy";
     private static final String INVENTORY_TAG = "Inventory";
 
@@ -41,6 +42,7 @@ public final class TemporalLoomControllerBlockEntity extends BlockEntity {
     private boolean formed;
     private boolean validationRequested = true;
     private boolean pendingOutput;
+    private long lastSuccessfulOutputGameTime = -1L;
     private int progress;
     private TemporalLoomMachineState machineState = TemporalLoomMachineState.UNFORMED;
     private TemporalLoomPattern.ValidationResult lastValidation =
@@ -169,6 +171,18 @@ public final class TemporalLoomControllerBlockEntity extends BlockEntity {
         return progress;
     }
 
+    public int currentStateDuration() {
+        return operatingProfile().durationFor(machineState);
+    }
+
+    public boolean hasDescender() {
+        return inventory.hasDescender();
+    }
+
+    public long lastSuccessfulOutputGameTime() {
+        return lastSuccessfulOutputGameTime;
+    }
+
     TemporalLoomInventory inventory() {
         return inventory;
     }
@@ -198,6 +212,13 @@ public final class TemporalLoomControllerBlockEntity extends BlockEntity {
     void setPendingOutput(boolean pendingOutput) {
         this.pendingOutput = pendingOutput;
         setChanged();
+    }
+
+    void recordSuccessfulOutput() {
+        if (level != null) {
+            lastSuccessfulOutputGameTime = level.getGameTime();
+            setChanged();
+        }
     }
 
     void transitionTo(TemporalLoomMachineState newState) {
@@ -253,6 +274,7 @@ public final class TemporalLoomControllerBlockEntity extends BlockEntity {
         tag.putString(STATE_TAG, machineState.serializedName());
         tag.putInt(PROGRESS_TAG, progress);
         tag.putBoolean(PENDING_OUTPUT_TAG, pendingOutput);
+        tag.putLong(LAST_SUCCESSFUL_OUTPUT_TAG, lastSuccessfulOutputGameTime);
         tag.put(ENERGY_TAG, energy.serializeNBT(provider));
         tag.put(INVENTORY_TAG, inventory.serialize(provider));
     }
@@ -264,6 +286,9 @@ public final class TemporalLoomControllerBlockEntity extends BlockEntity {
         machineState = TemporalLoomMachineState.byName(tag.getString(STATE_TAG));
         progress = Math.max(0, tag.getInt(PROGRESS_TAG));
         pendingOutput = tag.getBoolean(PENDING_OUTPUT_TAG);
+        lastSuccessfulOutputGameTime = tag.contains(LAST_SUCCESSFUL_OUTPUT_TAG)
+                ? tag.getLong(LAST_SUCCESSFUL_OUTPUT_TAG)
+                : -1L;
         if (tag.contains(ENERGY_TAG)) {
             energy.deserializeNBT(provider, tag.get(ENERGY_TAG));
         }
