@@ -123,6 +123,22 @@ Activating the controller reports formation, state, FE, progress, output status 
 in the action bar. Searching, Harvesting and Synthesizing emit progressively denser server-driven
 particles around the two counter-rotating loop paths and central singularity.
 
+## Formation and presentation contract
+
+The placed blocks and their normal models are the authoritative construction view. Players build
+and repair the complete 7x5x5 pattern using those visible blocks, and server-side validation always
+checks that physical pattern.
+
+The future finished appearance is a client-side formed-machine presentation layered over the
+validated structure. It may hide or replace the ordinary block models and render the infinity
+loops, singularity and temporal strands, but it must not replace blocks, alter validation or own
+machine state. If the structure becomes invalid, the presentation must disappear immediately and
+the ordinary construction blocks must become visible again. This keeps the proven greybox fully
+recoverable and allows visual work to evolve independently of production logic.
+
+The first successful full-pack construction and operating pass is recorded in
+`art/temporal_loom/verified_greybox.png`.
+
 ## Renderer anchor contract
 
 Horizontal coordinates are offsets from the controller centre; vertical coordinates start at the
@@ -182,5 +198,6 @@ client modpack.
 
 Implement a client-only Temporal Loom renderer that consumes the stable anchor contract and synced
 machine state. Start with two counter-rotating loop meshes and state-scaled gold temporal strands,
-then add the central singularity and Descender beam. Keep all geometry generation and animation out
-of the block entity and production state machine.
+then add the central singularity and Descender beam. Gate the presentation on the synchronized
+formed state and restore ordinary block rendering whenever the Loom is unformed. Keep all geometry
+generation and animation out of the block entity and production state machine.

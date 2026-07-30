@@ -92,5 +92,15 @@ the controller's base. Positive local `z` points behind the controller.
 | Lower output | `(0.0, 1.5, 2.0)` |
 | Outer anchors | `x=-3/3`, `y=1.5/3.5`, `z=0/4` |
 
-`TemporalLoomAnchors.toWorld` applies the controller's horizontal rotation. These coordinates are
+TemporalLoomAnchors.toWorld applies the controller's horizontal rotation. These coordinates are
 the stable contract for the next rendering milestone.
+
+## Formed visual boundary
+
+This pattern remains the server-authoritative machine after the final visual transformation is
+implemented. Unformed structures render every placed block normally so construction and repairs
+remain legible. A validated structure may enable a client-only formed presentation using the
+anchors above; invalidation must disable that presentation and reveal the normal blocks again.
+
+The renderer must never replace pattern blocks in the world or become responsible for formation,
+inventory, energy, upgrades or production state.
